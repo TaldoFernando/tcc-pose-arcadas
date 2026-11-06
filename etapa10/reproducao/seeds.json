@@ -1,0 +1,20 @@
+{
+  "divisao_geometria_original": 20261106,
+  "bootstrap_geometria_etapa4": 20261107,
+  "B_bootstrap_geometria": 10000,
+  "B_CDF_pontual_arquivado": 2000,
+  "bootstrap_estratos_etapa5": 20261120,
+  "divisoes_sensibilidade": [20261110,20261111,20261112,20261113,20261114,20261115,20261116,20261117,20261118,20261119],
+  "replay_perturbacoes_base": 20261105,
+  "replay_formula": "20261105 + 1000 * indice_ID_1_based + trial_0_based; ordem original preservada; seguir scripts/replay.py congelado",
+  "amostras_baseline": "20261105+11 superior; 20261105+12 inferior; 2048 pontos por arcada",
+  "CV_substituto": 20261106,
+  "treino_cabeca_fold": "20261106 + 100*fold; fold 0..4; mesma seed entre variantes",
+  "poses_aug": "20261106 + 5000 + 100*ID_numerico + limite",
+  "selecao_aug_treino": "20261106 + 100*fold + 10000*variante",
+  "bootstrap_substituto": 20351106,
+  "B_bootstrap_substituto": 10000,
+  "bootstrap_eixos_adicionado_etapa10": 20261130,
+  "B_bootstrap_eixos_etapa10": 10000,
+  "observacao": "Números são seeds, não datas de execução. Protocolos arquivados e código congelado são a fonte definitiva. Etapa10 não retreina nem muda regras."
+}

@@ -1,0 +1,23 @@
+{
+  "divisao": "mesma Etapa 3, 20/49, 17/47 conteúdos únicos",
+  "variants": [
+    "point_plane",
+    "trim_20",
+    "trim_30",
+    "posterior_40",
+    "posterior_60",
+    "multi3_rmse",
+    "multi3_medoid",
+    "multi5_rmse",
+    "multi5_medoid"
+  ],
+  "choice_criterion": "menor média de falha >5 por conteúdo-paciente (17 grupos de desenvolvimento), média dentro dos aliases; desempate por média das medianas",
+  "icp_max_iterations": 60,
+  "icp_distance": 8,
+  "starts": "mesmos quatro inícios anatômicos da Etapa 3",
+  "normal_neighbors": 30,
+  "bootstrap_seed": 20261107,
+  "bootstrap_patient_repetitions": 10000,
+  "gate": "não avaliar; apenas registrar 778/980 rejeições anteriores (79.39%)",
+  "posterior": "proxy geométrico por AP estimado: posterior 40% ou 60% de cada arcada, sem máscara validada da fissura"
+}

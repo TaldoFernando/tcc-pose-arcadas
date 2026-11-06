@@ -1,0 +1,30 @@
+[
+  {
+    "arquivo": "three.module.js",
+    "source": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "source_sha256": "76dea8151bc9352aef3528b4262e249b2604f62543828328db978d060d61a495",
+    "local_sha256": "76dea8151bc9352aef3528b4262e249b2604f62543828328db978d060d61a495",
+    "change": null
+  },
+  {
+    "arquivo": "STLLoader.js",
+    "source": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/STLLoader.js",
+    "source_sha256": "896d006a48b8f125385a485ccae154dadee801a953f0b45ceffe7ddd8a29ca93",
+    "local_sha256": "3b4bcbccae8ea29cb31202ff2d8900dbd36be7e7eb763b17b8a0c0b9f2ed181e",
+    "change": "import relativo local"
+  },
+  {
+    "arquivo": "OrbitControls.js",
+    "source": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js",
+    "source_sha256": "5a44a9e86a2a0fb11933eed69bc2cd33c76a496854c1aed6ed776efa87d7b064",
+    "local_sha256": "6b2f7df940a94e9aefe48466d8722c882e1430072c1dd680e978e0d70527ff00",
+    "change": "import relativo local"
+  },
+  {
+    "arquivo": "LICENSE",
+    "source": "https://cdn.jsdelivr.net/npm/three@0.160.0/LICENSE",
+    "source_sha256": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d",
+    "local_sha256": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d",
+    "change": null
+  }
+]

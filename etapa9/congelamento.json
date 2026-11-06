@@ -1,0 +1,20 @@
+{
+  "normalization_not_retrained": true,
+  "normalization_not_updated_from_test_landmarks": true,
+  "bank_IDs": [
+    "P016",
+    "P004",
+    "P045",
+    "P029",
+    "P002"
+  ],
+  "source_files": {
+    "etapa5/anatomical_pair.py": "160cbda2c90cd53ba7087ee5ff44a205268371d7e3d448246fff30e9556f4d02",
+    "etapa5/rigid_icp.py": "a699579b64ff3a120ecde1a51ac70470c538fb32035c7607789be7da070d9034",
+    "etapa6/render_views.py": "4ac57e0743b09581dccf73133ccb2aee894e025475084addc43a8af85a10843f",
+    "etapa6/stl/modelo_normalizacao.npz": "164e8a4936a745b21efd2adfcca548ca6e95513bc655e545932761fb6a169e00",
+    "etapa7b/camera_config_proprio.json": "4b6eb16c688336a65f2dc153a662a1d6e7ef9b6ba426c6bc2842122491e9cf40"
+  },
+  "camera_copy_sha256": "4b6eb16c688336a65f2dc153a662a1d6e7ef9b6ba426c6bc2842122491e9cf40",
+  "config_sha256": "670850f1be178820bd0fdbc02c729370329e00ab98ea4feec1659dee4f1141d3"
+}

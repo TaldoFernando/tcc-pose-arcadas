@@ -1,0 +1,36 @@
+{
+  "B_bootstrap": 10000,
+  "B_permutation": 10000,
+  "seed_stats": 20261120,
+  "methods": [
+    "controle",
+    "anatomica",
+    "multi5_rmse"
+  ],
+  "original_split": "20/49 unchanged",
+  "stability_splits": 10,
+  "trials_per_ID": 20,
+  "group_label": "grupo do diretório; GOSLON extraído literalmente, não validado",
+  "group_goslon_audit": {
+    "1": [
+      1,
+      2
+    ],
+    "2": [
+      3
+    ],
+    "3": [
+      4,
+      5
+    ]
+  },
+  "inference_inputs": "clouds and template geometry only; no labels",
+  "balanced_bank": "5 templates; quotas as equal as possible, extras ascending group; P016 fixed primary; geometry farthest-first restricted to dev",
+  "stability_bank": "new dev PCA medoid primary; 5 geometric farthest-first templates; no query labels",
+  "label_conflicts": "exclude content groups with inconsistent GOSLON from primary GOSLON trend; exclude cross-group content conflicts from group-stratified summaries; never correct labels",
+  "trend": "Spearman on patient-content failure rates; permutation p two-sided; bootstrap CI over patient-content",
+  "RMSE_failure": "Spearman of per-patient median chosen symmetric RMSE and failure rate >5; association not explanation/causality",
+  "vertical_bias": "signed SO3 vertical components; per-patient mean and population SD; bias fraction mu²/(mu²+sigma²), equal patient-content weights; near-pi sign ambiguity noted",
+  "split_differences": "descriptive distribution, not 10 independent trials; paired mean failure5 and mean patient medians by content cluster",
+  "classifier": "prepare stub only, never execute"
+}

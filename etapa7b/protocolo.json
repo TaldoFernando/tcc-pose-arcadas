@@ -1,0 +1,92 @@
+{
+  "rotulo": "MODELO SUBSTITUTO; nenhuma inferência sobre Goslon AI",
+  "seed": 20261106,
+  "folds": 5,
+  "unique_content_primary": 63,
+  "group_counts": {
+    "1": 27,
+    "2": 13,
+    "3": 23
+  },
+  "five_class": "NÃO EXECUTAR: classe GOSLON 5 tem somente quatro conteúdos únicos não conflitantes",
+  "group_conflict_policy": "excluir conteúdo de grupos conflitantes; um representante por conteúdo, aliases no mesmo fold",
+  "goslon_conflict_policy": "não converter grupo em GOSLON; conflito GOSLON não exclui grupo consistente",
+  "backbone": "torchvision MobileNet_V3_Small IMAGENET1K_V1; features + adaptive average pooling; 576 dimensões/vista; inteiramente congelado, eval; seis vistas concatenadas",
+  "head": {
+    "input": 3456,
+    "layers": "LayerNorm(3456), Linear(3456,64), GELU, Dropout(0.2), Linear(64,3)",
+    "epochs": 80,
+    "batch_size": 8,
+    "optimizer": "AdamW",
+    "lr": 0.001,
+    "weight_decay": 0.01,
+    "loss": "CrossEntropy, pesos inversos à frequência apenas no treino",
+    "selection": "última época, sem early stopping, sem ajuste por teste",
+    "training_seed": "20261106 + 100*fold, idêntica entre as três variantes",
+    "steps": "um exemplo por conteúdo/época, mesmo número de atualizações nas três variantes",
+    "paired_ablation": "mesma inicialização, máscaras dropout, ordem de minibatches e número de atualizações; RNG de escolha de augmentation separado por variante"
+  },
+  "augmentation": {
+    "canonical": "nenhuma rotação",
+    "aug10": "probabilidade 0.5 canônica; senão uma de seis rotações 3D fixas por conteúdo, eixo sorteado e ângulo uniforme [-10,10]",
+    "aug20": "idem, limite 20 graus",
+    "seed": "20261106+5000+100*ID+limite",
+    "not_2d_rotation": true,
+    "training_selection_seed": "20261106 + 100*fold + 10000*variante"
+  },
+  "baseline_logistic": "StandardScaler + LogisticRegression(C=1,max_iter=2000,class_weight=balanced); 8 descritores por vista; treino somente canônico",
+  "baseline_majority": "classe mais frequente somente no treino; empate menor grupo",
+  "rotations": {
+    "angles_deg": [
+      2,
+      3,
+      5,
+      10,
+      20
+    ],
+    "axes": [
+      "vertical",
+      "anteroposterior",
+      "lateral"
+    ],
+    "signs": [
+      -1,
+      1
+    ],
+    "center": "centroide combinado dos pontos canônicos; ambos arcos juntos"
+  },
+  "normalizers": [
+    "controle",
+    "anatomica",
+    "multi5_rmse"
+  ],
+  "normalization_bank": [
+    "P016",
+    "P004",
+    "P045",
+    "P029",
+    "P002"
+  ],
+  "normalization_refitting": "nenhum; código e banco congelados; grupo/rótulo nunca entra na normalização",
+  "realistic": {
+    "trials_per_content": 20,
+    "source": "etapa5/clouds; mesmas seeds/reamostragem/ruído sigma 0.15/recorte regional 10–30%; malhas decimadas leve/forte",
+    "render_geometry": "decimação visível; ruído e recorte afetam as nuvens de registro; sem reconstrução inventada da superfície",
+    "none": "rotação SO(3) e translação originais, sem reenquadrar; imagens vazias contam como resultado"
+  },
+  "scoring": "previsões out-of-fold; referência de troca = condição canônica multi5 comum a todos os métodos; sinais/ensaios ponderados igualmente dentro de cada conteúdo; depois conteúdos com mesmo peso",
+  "bootstrap": {
+    "replicates": 10000,
+    "unit": "conteúdo-paciente; mantém sinais/ensaios juntos",
+    "interval": "percentil 2.5/97.5; confusão reponderada por conteúdo, F1 macro calculado novamente",
+    "seed": 20351106
+  },
+  "thresholds": "primeiro ângulo testado com taxa de troca estritamente >5% ou >10%; sem interpolar; ângulo 0 incluído como referência",
+  "limitations": [
+    "rótulos extraídos de nomes, sem validação clínica",
+    "normalizador global previamente congelado contém templates que podem estar nos folds de teste; CV não independente para toda a cadeia",
+    "resultado geométrico consistente não significa anatomicamente correto",
+    "erro ordinal de grupos 1–3 não equivale a erro GOSLON 1–5",
+    "bootstrap de predições OOF fixas: não retreina redes nem inclui incerteza de escolha de pesos/seeds"
+  ]
+}

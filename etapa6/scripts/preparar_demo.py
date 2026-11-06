@@ -1,0 +1,18 @@
+from pathlib import Path
+import sys,json,csv,hashlib
+import numpy as np
+ROOT=Path(__file__).resolve().parents[2];OUT=ROOT/'etapa6';sys.path.insert(0,str(OUT));sys.path.insert(0,str(ROOT/'etapa5'))
+from render_views import read_stl,camera_basis,VIEWS
+from anatomical_pair import anatomical_frame
+pairs={p['id']:p for p in json.loads((ROOT/'etapa5/pares_ids.json').read_text())};base=json.loads((ROOT/'etapa5/resultados/baselines_balanceado_original.json').read_text());raw=np.load(ROOT/'etapa5/templates_raw/P016.npz');F,_=anatomical_frame(raw['upper'],raw['lower'],1.,'pca_sign');origin=raw['origin'];template={a:(read_stl(ROOT/'etapa5'/pairs['P016'][a]['arquivo'])-origin)@F for a in ['superior','inferior']}
+view_spec={'Angulada':([.65,-1,.35],[0,0,1],'ambas'),'Direita':([1,0,0],[0,0,1],'ambas'),'Esquerda':([-1,0,0],[0,0,1],'ambas'),'Up':([0,0,1],[0,-1,0],'superior'),'Frontal':([0,-1,0],[0,0,1],'ambas'),'Inferior':([0,0,-1],[0,1,0],'inferior')};views={}
+for name,(direction,up,selection) in view_spec.items():
+ points=np.concatenate([template[a].reshape(-1,3) for a in template if selection=='ambas' or selection==a]);target=(points.min(0)+points.max(0))/2;direction=np.array(direction,float);direction/=np.linalg.norm(direction);camera={'projection':'orthographic','position':(target+direction*200).tolist(),'target':target.tolist(),'up':up,'resolution':[512,512],'ortho_height':100.,'near':.1,'far':1000.,'background':[32,32,32],'mesh':selection};_,B=camera_basis(camera);q=(points-target)@B;camera['ortho_height']=float(max(np.ptp(q[:,0]),np.ptp(q[:,1]))*1.15);views[name]=camera
+appearance={'background':[32,32,32],'material_rgb':[220,220,220],'ambient':.35,'diffuse':.65,'light_direction_camera':[-.3,.5,-1.],'shading':'smooth','two_sided':True,'supersampling':2}
+experimental={'schema_version':1,'status':'PLACEHOLDER','allow_uncalibrated':True,'source':'geometry of P016 only; not fitted to any training image','coordinate_frame':'P016 frame from etapa5 multi-template output followed by F.T; original inputs require that fixed transform first','training_equivalence':False,'parameter_status':'ALL CAMERA/LIGHT/MATERIAL VALUES ARE PLACEHOLDER DEMONSTRATION','views':views,'appearance':appearance}
+(OUT/'camera_config_experimental.json').write_text(json.dumps(experimental,indent=2))
+unknown={key:'PLACEHOLDER' for key in ['projection','position','target','up','ortho_height','fov_y_deg','resolution','background','near','far','mesh','distance','lighting','material','input_coordinate_frame','model_base_treatment']};config={'schema_version':1,'status':'PLACEHOLDER','allow_uncalibrated':False,'reason':'No confirmed STL-to-training-image correspondences; no original camera script found','calibration_executed':False,'source_search':'resultados/fontes_resumo.json; actual paths stay private','views':{v:dict(unknown) for v in VIEWS},'appearance':'PLACEHOLDER','required_input':'Confirmed local correspondence for STL + six training views, with disjoint calibration/validation content-patients'}
+(OUT/'camera_config.json').write_text(json.dumps(config,ensure_ascii=False,indent=2));rng=np.random.default_rng(20261106);IDs=sorted(rng.choice(sorted(base),10,replace=False).tolist());manifest=[]
+for i in IDs:
+ r=base[i]['multi5_rmse'];R=np.array(r['R']);t=np.array(r['t']);manifest.append({'ID':i,'meshes':{a:str(Path('..')/'etapa5'/pairs[i][a]['arquivo']) for a in ['superior','inferior']},'R':(F.T@R).tolist(),'t':(F.T@t).tolist(),'pose_source':'etapa5 multi5_rmse balanced bank baseline; consistent pose, not anatomy certification','training_image_status':'UNAVAILABLE_CONFIRMED_PAIR'})
+(OUT/'demo_manifest.json').write_text(json.dumps(manifest,indent=2));print('DEMO IDs',','.join(IDs),'training config PLACEHOLDER; no calibration executed')

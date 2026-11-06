@@ -1,0 +1,248 @@
+{
+  "status": "STANDARDIZED_STL",
+  "views": {
+    "Angulada": {
+      "projection": "orthographic",
+      "position": [
+        107.79710893915126,
+        -153.95022626401143,
+        68.40402866513374
+      ],
+      "target": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "ortho_height": 110.0,
+      "resolution": [
+        224,
+        224
+      ],
+      "near": 0.1,
+      "far": 1000.0,
+      "background": [
+        32,
+        32,
+        32
+      ],
+      "mesh": "ambas",
+      "parameter_status": "PRÓPRIO_CONGELADO_NÃO_CALIBRADO_AO_TREINO_ORIGINAL"
+    },
+    "Direita": {
+      "projection": "orthographic",
+      "position": [
+        200.0,
+        0.0,
+        0.0
+      ],
+      "target": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "ortho_height": 110.0,
+      "resolution": [
+        224,
+        224
+      ],
+      "near": 0.1,
+      "far": 1000.0,
+      "background": [
+        32,
+        32,
+        32
+      ],
+      "mesh": "ambas",
+      "parameter_status": "PRÓPRIO_CONGELADO_NÃO_CALIBRADO_AO_TREINO_ORIGINAL"
+    },
+    "Esquerda": {
+      "projection": "orthographic",
+      "position": [
+        -200.0,
+        0.0,
+        0.0
+      ],
+      "target": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "ortho_height": 110.0,
+      "resolution": [
+        224,
+        224
+      ],
+      "near": 0.1,
+      "far": 1000.0,
+      "background": [
+        32,
+        32,
+        32
+      ],
+      "mesh": "ambas",
+      "parameter_status": "PRÓPRIO_CONGELADO_NÃO_CALIBRADO_AO_TREINO_ORIGINAL"
+    },
+    "Up": {
+      "projection": "orthographic",
+      "position": [
+        0.0,
+        0.0,
+        200.0
+      ],
+      "target": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "up": [
+        0,
+        -1,
+        0
+      ],
+      "ortho_height": 110.0,
+      "resolution": [
+        224,
+        224
+      ],
+      "near": 0.1,
+      "far": 1000.0,
+      "background": [
+        32,
+        32,
+        32
+      ],
+      "mesh": "superior",
+      "parameter_status": "PRÓPRIO_CONGELADO_NÃO_CALIBRADO_AO_TREINO_ORIGINAL"
+    },
+    "Frontal": {
+      "projection": "orthographic",
+      "position": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "target": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "ortho_height": 110.0,
+      "resolution": [
+        224,
+        224
+      ],
+      "near": 0.1,
+      "far": 1000.0,
+      "background": [
+        32,
+        32,
+        32
+      ],
+      "mesh": "ambas",
+      "parameter_status": "PRÓPRIO_CONGELADO_NÃO_CALIBRADO_AO_TREINO_ORIGINAL"
+    },
+    "Inferior": {
+      "projection": "orthographic",
+      "position": [
+        0.0,
+        0.0,
+        -200.0
+      ],
+      "target": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "ortho_height": 110.0,
+      "resolution": [
+        224,
+        224
+      ],
+      "near": 0.1,
+      "far": 1000.0,
+      "background": [
+        32,
+        32,
+        32
+      ],
+      "mesh": "inferior",
+      "parameter_status": "PRÓPRIO_CONGELADO_NÃO_CALIBRADO_AO_TREINO_ORIGINAL"
+    }
+  },
+  "appearance": {
+    "background": [
+      32,
+      32,
+      32
+    ],
+    "material_rgb": [
+      220,
+      220,
+      220
+    ],
+    "ambient": 0.35,
+    "diffuse": 0.65,
+    "light_direction_camera": [
+      -0.3,
+      0.5,
+      -1.0
+    ],
+    "shading": "smooth",
+    "two_sided": true,
+    "supersampling": 2
+  },
+  "angle_definition": {
+    "Angulada_azimuth_deg": 35,
+    "Angulada_elevation_deg": 20,
+    "Direita": "camera on canonical +X; clinical laterality not certified",
+    "Esquerda": "camera on canonical -X; clinical laterality not certified"
+  },
+  "scale_units": "native STL, provisionally interpreted as mm; no per-patient zoom",
+  "model_base_treatment": "preserve all original triangles; no trimming",
+  "purpose": "MODELO SUBSTITUTO: câmeras próprias; não reproduzem câmeras originais",
+  "legacy_training_cameras": "PLACEHOLDER",
+  "camera_selection": "constantes redondas a priori, sem otimização por imagens, classes ou folds",
+  "axes": {
+    "lateral": [
+      1,
+      0,
+      0
+    ],
+    "anteroposterior": [
+      0,
+      1,
+      0
+    ],
+    "vertical": [
+      0,
+      0,
+      1
+    ]
+  },
+  "normalization_model": "../etapa6/stl/modelo_normalizacao.npz"
+}
