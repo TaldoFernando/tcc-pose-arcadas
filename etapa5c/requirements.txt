@@ -1,0 +1,10 @@
+# Versões do runtime local da Etapa 5C (Python 3.9.6, macOS arm64).
+# Disponibilidade de wheels depende da plataforma e da versão de Python.
+numpy==1.26.4
+scipy==1.13.1
+scikit-learn==1.6.1
+torch==2.8.0
+torchvision==0.23.0
+open3d==0.18.0
+matplotlib==3.9.4
+Pillow==11.3.0

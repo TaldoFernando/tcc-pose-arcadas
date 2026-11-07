@@ -136,3 +136,21 @@
 .local/
 **/.venv/
 **/__pycache__/
+
+# Etapa 5C e correções 7B: somente código, protocolo e documentação pública.
+!/etapa5c/scripts/auditar_resultados.py
+!/etapa5c/scripts/avaliar.py
+!/etapa5c/scripts/classificador.py
+!/etapa5c/scripts/congelar_execucao.py
+!/etapa5c/scripts/preparar.py
+!/etapa5c/scripts/relatorio.py
+!/etapa5c/scripts/teste_final.py
+!/etapa5c/scripts/verificar.py
+!/etapa7b/correcoes_v2/scripts/avaliar_correcao.py
+!/etapa7b/correcoes_v2/scripts/centralizar.py
+!/etapa7b/correcoes_v2/scripts/extrair.py
+!/etapa7b/correcoes_v2/scripts/gerar_relatorio.py
+!/etapa7b/correcoes_v2/scripts/verificar.py
+!/etapa5c/plano_previo.json
+!/etapa5c/README_PUBLICO.md
+!/etapa5c/requirements.txt

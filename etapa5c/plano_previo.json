@@ -1,0 +1,50 @@
+{
+  "etapa": "5C",
+  "privacidade": "Local, copias, saidas apenas IDs; sem envio externo ou push Git",
+  "identidade": "Nenhum identificador pseudonimizado clinico confirmado encontrado. P001... identificam moldes/pastas, nao identidade clinica. Fallback por dupla SHA256 de arcadas.",
+  "busca_identidade": ["etapa1/unidades.csv", "relatorios/pacientes.csv", "etapa5/rotulos_local.csv", "etapa5/privado/id_pasta_local.csv", "etapa7b/conteudos_folds.csv"],
+  "exclusao_conflitos": "Excluir um conteudo inteiro se qualquer alias divergir em grupo OU GOSLON; nao corrigir rotulos.",
+  "geometria_sem_rotulos": {
+    "amostras_por_arcada": 10000,
+    "seed": 20261122,
+    "triagem": "Candidatos com desvios relativos maximos <=5% em RMS de eixos PCA de ambas arcadas e area de ambas arcadas. Independente de rotulos.",
+    "refinamento": "ICP rigido do par, mesmos R/t para arcos, sem escala/reflexao; frame geometrico orientado como inicializacao, maximo 40 iteracoes; vizinho mais proximo em ambos sentidos por arcada.",
+    "suspeita": "Ambas arcadas: RMSE simetrico <=0.50 mm presumidos e P95 bidirecional <=1.00 mm; criterio de engenharia, nao validado para identidade.",
+    "bloqueio": "Conectar conteudos muito proximos em bloco conservador para split, CV e bootstrap; apenas suspeita para revisao manual, nao declarar mesmo paciente.",
+    "limite": "Pode perder visitas longitudinais diferentes e gerar falsos positivos; hash/conteudo/geometria nao validam identidade clinica."
+  },
+  "holdout": {
+    "seed": 20261122,
+    "fracao_alvo": 0.25,
+    "estratificacao": "Grupos 1/2/3; quotas por maiores restos para round(0.25*n); blocos conservadores nunca separados.",
+    "restricao_previa": "Os 5 conteudos do banco global congelado e seus blocos ficam exclusivamente no desenvolvimento; evita templates diretamente no teste final. Amostragem condicional declarada, nao sorteio irrestrito.",
+    "selecionar": "Embaralhar blocos elegiveis pela seed e subset-sum deterministico por quotas; se exatas inviaveis, minimizar desvio de quotas e tamanho sem consultar desempenho.",
+    "exposicao_historica": "Os mesmos conteudos ja foram analisados nas etapas anteriores. Teste bloqueado para esta reanalise; nao teste externo ou inedito."
+  },
+  "CV": {"folds": 4, "repeticoes": 5, "seeds": [20261123,20261124,20261125,20261126,20261127], "algoritmo": "StratifiedGroupKFold shuffle=True, blocos conservadores; apenas desenvolvimento"},
+  "templates": {
+    "alternativa_permitida": "Analise de sensibilidade excluindo os 5 conteudos atuais da pontuacao OOF em todas as condicoes, sem novo banco por fold.",
+    "banco": ["P016","P004","P045","P029","P002"],
+    "justificativa": "Features e poses canonicas disponiveis foram geradas no banco global. Recriar o banco por fold exigiria refazer imagens/features e treinar toda a cadeia em referenciais novos; esta etapa conserva a cadeia e quantifica a sensibilidade permitida.",
+    "ressalva": "Na CV o banco global pode expor geometria da validacao; retirar 5 da pontuacao nao remove essa exposicao. No teste final os 5 alvos pertencem ao desenvolvimento; exposicao historica anterior permanece."
+  },
+  "modelo": {
+    "rotulo": "MODELO SUBSTITUTO, nao Goslon AI",
+    "arquitetura": "MobileNet V3 Small ImageNet congelada; concatenacao de 6 features de 576; LayerNorm3456-Linear64-GELU-Dropout0.2-Linear3",
+    "treino": "Pose canonica multi5 somente; 80 epocas, ultima epoca; AdamW lr0.001 weight_decay0.01 batch8; pesos de classe calculados apenas no treino; sem tuning ou augmentation novo.",
+    "seed_por_ajuste": "20261200 + 1000*repeticao_0_based + 100*fold_0_based",
+    "baselines": "Maioria do treino e StandardScaler+LogisticRegression C1 class_weight balanced max_iter2000; sem selecao por teste",
+    "seed_modelo_final": 20261299,
+    "escolha_final": "Arquitetura/hiperparametros acima fixos; treino final em todo desenvolvimento, sem selecao de variante, epoca ou limiar pelo teste."
+  },
+  "primario": "F1 macro canonico do modelo substituto fixo no teste final; bootstrap de blocos-paciente proxy; estudo reanalitico, nao validacao externa.",
+  "tolerancia_pose": "Somente predicoes OOF no desenvolvimento; 4folds x5seeds; agregar sinais/ensaios e repeticoes dentro do paciente proxy; nunca tratar 5 repeticoes como 5 pacientes.",
+  "condicoes_OOF": "Canonica; rotacoes 2/3/5/10/20 graus, tres eixos, sinais +/-; nenhuma, centralizado, controle, anatomica, multi5; ensaios realistas anteriores. Referencia de troca = canonica do proprio modelo e repeticao.",
+  "teste_final": "Abrir apenas apos treinar/avaliar OOF e congelar decisao final e pesos treinados em todo desenvolvimento. Somente condicao canonica, modelo fixo e baselines; nenhuma curva de tolerancia no teste.",
+  "metricas": "Acuracia, F1 macro do conjunto, erro ordinal grupos1-3, taxa de troca para OOF; IC95 percentil por 10000 bootstraps de paciente proxy/bloco, com medidas repetidas juntas",
+  "seed_bootstrap": 20261300,
+  "exploratorio": "Demais metricas, grupos, condicoes, limiares de tolerancia e contrastes; IC pontuais, sem ajuste de multiplicidade.",
+  "classe_teste_pequena": "Avisar se qualquer grupo do teste tiver menos de cinco pacientes proxy; nao mudar split, seed ou modelo para melhorar resultados.",
+  "rotulos_antes_hash": "Somente auditoria de conflitos e estratificacao necessarias a construir a divisao. Nenhuma metrica de classificacao, associacao ou escolha por desempenho antes do hash.",
+  "cameras_originais": "PLACEHOLDER; imagens usam cameras proprias congeladas; nao e equivalencia ao treino Goslon AI"
+}

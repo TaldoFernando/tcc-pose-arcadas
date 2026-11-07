@@ -11,6 +11,7 @@ Código de pesquisa para inspeção de malhas, registro rígido de pares de arca
 | `scripts/`, `etapa1/` | Inventário de STL, pareamento e ensaios iniciais |
 | `etapa2/`, `etapa3/` | Registro do par, regras de orientação e diagnóstico |
 | `etapa4/`, `etapa5/` | Variantes de refinamento, medidas repetidas e estratificação |
+| `etapa5c/` | [Divisão bloqueada, CV agrupada repetida e avaliação OOF](etapa5c/README_PUBLICO.md) |
 | `etapa6/` | Renderização offscreen e câmeras próprias |
 | `etapa7/`, `etapa7b/` | Contratos de avaliação e experimento com modelo substituto |
 | `etapa8/` | Ferramentas para marcação humana no 3D Slicer |
@@ -53,10 +54,16 @@ Landmarks exibidos no protótipo são mock, não marcações clínicas. As ferra
 Os testes de integração históricos requerem dados privados locais; não estão acompanhados de STL no repositório público. A inspeção sintática pode ser executada sem abrir dados:
 
 ```sh
-python3 -m compileall -q "scripts" "etapa1" "etapa2" "etapa3" "etapa4" "etapa5" "etapa6" "etapa7" "etapa7b" "etapa8" "etapa9" "etapa10"
+python3 -m compileall -q "scripts" "etapa1" "etapa2" "etapa3" "etapa4" "etapa5" "etapa5c" "etapa6" "etapa7" "etapa7b" "etapa8" "etapa9" "etapa10"
 ```
 
 O código de consolidação da Etapa 10 também depende das fontes sanitizadas do pacote local, que não foram transferidas automaticamente para este repositório. A publicação do código não equivale à disponibilização pública dos dados do estudo.
+
+## Etapa 5C e correções da Etapa 7B
+
+A Etapa 5C acrescenta agrupamento por conteúdo quando a identidade clínica não está confirmada, exclusão de rótulos conflitantes, teste bloqueado estratificado de aproximadamente 25%, CV de quatro folds repetida com cinco seeds e bootstrap por paciente proxy. A tolerância à pose é calculada com previsões fora do fold no desenvolvimento; o teste é aberto somente após congelar o modelo final. O banco global continua sujeito à análise de sensibilidade excluindo cinco conteúdos da pontuação; isso não elimina toda a exposição geométrica na CV. O novo bloqueio não apaga a exposição histórica dos dados em etapas anteriores.
+
+O código de centralização sem corrigir orientação e das análises da correção 7B está em `etapa7b/correcoes_v2/scripts/`. Os relatórios, folds por ID, conflitos individuais, rótulos, features, checkpoints e predições dessas extensões permanecem privados. Consulte [as instruções públicas da Etapa 5C](etapa5c/README_PUBLICO.md) para entradas necessárias e ordem de execução em uma cópia limpa.
 
 ## Política de publicação
 
