@@ -14,7 +14,7 @@ Código de pesquisa para inspeção de malhas, registro rígido de pares de arca
 | `etapa5c/` | [Divisão bloqueada, CV agrupada repetida e avaliação OOF](etapa5c/README_PUBLICO.md) |
 | `etapa6/` | Renderização offscreen e câmeras próprias |
 | `etapa7/`, `etapa7b/` | Contratos de avaliação e experimento com modelo substituto |
-| `etapa8/` | Ferramentas para marcação humana no 3D Slicer |
+| `etapa8/` | [Marcação humana e avaliação geométrica A1/T1](etapa8/README_PUBLICO.md) |
 | `etapa9/` | API Flask, interface Three.js e normalização integrada |
 | `etapa10/` | Código para consolidação, figuras e rastreabilidade para o TCC |
 

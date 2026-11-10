@@ -154,3 +154,23 @@
 !/etapa5c/plano_previo.json
 !/etapa5c/README_PUBLICO.md
 !/etapa5c/requirements.txt
+
+# Etapa 8: código, testes sintéticos e protocolo de execução; dados continuam locais.
+!/etapa8/coleta.py
+!/etapa8/etapa8_painel_visual.py
+!/etapa8/referencias_pendentes.py
+!/etapa8/apoio_edicao.py
+!/etapa8/testar_painel_visual_no_slicer.py
+!/etapa8/testar_referencias_no_slicer.py
+!/etapa8/testar_protocolo_v2_no_slicer.py
+!/etapa8/testar_abertura_template_no_slicer.py
+!/etapa8/coleta24_v3/gerenciar.py
+!/etapa8/a1t1_v4/executar.py
+!/etapa8/a1t1_v4/plano_execucao.json
+!/etapa8/README_PUBLICO.md
+!/etapa8/tests/fixtures.py
+!/etapa8/tests/test_A1_T1.py
+!/etapa8/tests/test_limite24.py
+!/etapa8/tests/test_painel_visual.py
+!/etapa8/tests/test_referencias_pendentes.py
+!/etapa8/tests/test_protocolo_versionado.py
